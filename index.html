@@ -24,8 +24,7 @@
 			bottom: 0;
 		}
 	</style>
-	<script src="pi.js"></script>
-	<script src="another.js"></script>
+	<script src="src/pi.js"></script>
 	<title>파일파이리더</title>
 </head>
 <body>
@@ -47,10 +46,10 @@
 			for (const value of pi) {
 				if(plays) {
 					if(value === '.') {
-						audio = new Audio('point.mp3');
+						audio = new Audio('src/point.mp3');
 						await play(audio, '.');
 					} else {
-						audio = new Audio(value + '.mp3');
+						audio = new Audio('src/' + value + '.mp3');
 						await play(audio, Number(value));
 					}
 				} else {
