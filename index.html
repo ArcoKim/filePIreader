@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	<style>
+		html, body {
+			margin: 0;
+			height: 100%;
+			overflow: hidden;
+			background-color: black;
+		}
+		#one {
+			color: white;
+			font-size: 200px;
+			text-align: center;
+		}
+		#kakao {
+			width: 350px;
+			height: 100px;
+			position: absolute;
+			bottom: 0;
+		}
+	</style>
+	<script src="pi.js"></script>
+	<script src="another.js"></script>
+	<title>파일파이리더</title>
+</head>
+<body>
+	<button onclick="plays = true; audioPlay();">재생</button>
+	<button onclick="plays = false;">초기화</button>
+	<h1 id="one"></h1>
+	<img src="voice_logo.png" alt="카카오 API" id="kakao">
+	<script>
+		var audio;
+		var plays = true;
+		function play(audio, value) {
+			audio.play();
+			document.getElementById('one').innerHTML = value;
+			return new Promise(function(resolve, reject) {
+				audio.addEventListener('ended', resolve);
+			});
+		}
+		async function audioPlay() {
+			for (const value of pi) {
+				if(plays) {
+					if(value === '.') {
+						audio = new Audio('point.mp3');
+						await play(audio, '.');
+					} else {
+						audio = new Audio(value + '.mp3');
+						await play(audio, Number(value));
+					}
+				} else {
+					document.getElementById('one').innerHTML = '';
+					break;
+				}
+			}
+		}
+	</script>
+</body>
+</html>
